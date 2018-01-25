@@ -1,3 +1,9 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/tools">
     <string name="app_name">CodeEditor</string>
+
+    <string-array name="ProgramTypeList">
+        <item>C语言</item>
+        <item>Java</item>
+        <item>C++</item>
+    </string-array>
 </resources>
