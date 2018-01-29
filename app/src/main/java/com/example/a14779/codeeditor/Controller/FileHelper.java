@@ -23,7 +23,7 @@ public class FileHelper {
     }
 
     public static void saveFile(String fileName, String content, String filePath) throws IOException {
-        File file = new File(filePath+fileName);
+        File file = new File(filePath+"/"+fileName);
         if (!file.exists()){
             file.createNewFile();
         }
@@ -54,4 +54,8 @@ public class FileHelper {
         file.delete();
     }
 
+    public static long getFileSize(String fileName, String filePath){
+        long size = 0;
+        return size;
+    }
 }

@@ -7,8 +7,10 @@
         android:layout_height="60dp"
         android:orientation="horizontal">
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_settings_black_24dp"
             android:id="@+id/program_type_image"/>
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="example.c"
-                android:textSize="30dp"
+                android:textSize="24dp"
                 android:textStyle="bold"
                 android:id="@+id/program_name"/>
 
