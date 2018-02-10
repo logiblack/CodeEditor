@@ -1,7 +1,6 @@
 package com.example.a14779.codeeditor.Controller;
 
 import android.content.Context;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,12 +20,13 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
 
     private Context context;
     private List<String> nameList;
-    private View.OnClickListener mClickListener;
-    private View.OnLongClickListener mLongClickListener;
+    private ReClickListener mClickListener;
+    private String basePath;
 
     public HomeRecyclerAdapter(Context context, List<String> nameList) {
         this.context = context;
         this.nameList = nameList;
+        basePath = context.getExternalFilesDir("").getPath();
     }
 
     @Override
@@ -34,13 +34,12 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
         return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.home_page_list_item,
                 parent,
                 false),
-                mClickListener,
-                mLongClickListener);
+                mClickListener);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        String basePath = context.getExternalFilesDir("").getPath();
+
         File file = new File(basePath+"/"+nameList.get(position));
         holder.circleImageView.setImageResource(R.drawable.java_icon);
         holder.title.setText(nameList.get(position));
@@ -49,12 +48,8 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
         //holder.time.setText(String.valueOf(file.lastModified()));
     }
 
-    public void setOnItemClickListener(View.OnClickListener clickListener){
+    public void setClickListener(ReClickListener clickListener){
         this.mClickListener = clickListener;
-    }
-
-    public void setOnItemLongClickListener(View.OnLongClickListener longClickListener){
-        mLongClickListener = longClickListener;
     }
 
     @Override
@@ -62,23 +57,40 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
         return nameList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public void addItem(String itemName){
+        FileHelper.saveFile(itemName, "", basePath);
+        nameList.add(itemName);
+        this.notifyDataSetChanged();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
         private CircleImageView circleImageView;
         private TextView title;
         private TextView time;
         private TextView size;
+        private ReClickListener clickListener;
         public MyViewHolder(View itemView,
-                            View.OnClickListener clickListener,
-                            View.OnLongClickListener longClickListener) {
+                            ReClickListener clickListener) {
             super(itemView);
-            itemView.setOnClickListener(clickListener);
-            itemView.setOnLongClickListener(longClickListener);
             circleImageView = itemView.findViewById(R.id.program_type_image);
             title = itemView.findViewById(R.id.program_name);
             time = itemView.findViewById(R.id.program_create_time);
             size = itemView.findViewById(R.id.program_size);
+            this.clickListener = clickListener;
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
+        @Override
+        public void onClick(View v) {
+            clickListener.onClick(v, getAdapterPosition());
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            clickListener.onLongClick(v, getAdapterPosition());
+            return true;
+        }
     }
 }

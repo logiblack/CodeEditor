@@ -1,4 +1,4 @@
-package com.example.a14779.codeeditor.View.CodeView;
+package com.example.a14779.codeeditor.View.CodeEditText;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

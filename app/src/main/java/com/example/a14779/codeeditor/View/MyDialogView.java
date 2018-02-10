@@ -10,13 +10,12 @@ import android.content.DialogInterface;
 
 public class MyDialogView extends AlertDialog.Builder {
     private String mPostiveButtonText;
+    private String mNegtiveButtonText;
 
     protected MyDialogView(Context context) {
         super(context);
 
     }
-
-
 
     @Override
     public AlertDialog.Builder setPositiveButton(int textId, DialogInterface.OnClickListener listener) {

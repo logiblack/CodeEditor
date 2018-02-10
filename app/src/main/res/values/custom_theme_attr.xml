@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--控制app背景颜色-->
+    <attr name="custom_backgroundColor" format="reference|color" />
+    <!--控制appToolBar的背景色-->
+    <attr name="custom_toolBarColor" format="reference" />
+    <!--控制app文字颜色-->
+    <attr name="custom_textColor" format="reference|color" />
+</resources>

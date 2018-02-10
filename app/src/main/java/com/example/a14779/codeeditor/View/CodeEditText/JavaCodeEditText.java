@@ -1,15 +1,15 @@
-package com.example.a14779.codeeditor.View.CodeView;
+package com.example.a14779.codeeditor.View.CodeEditText;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.Editable;
-
 import java.util.regex.Pattern;
 
 /**
  * Created by liangtao on 18-1-22.
  */
 
-public class JavaCodeEditText extends AbsCodeEditText {
+public class JavaCodeEditText extends GeneralEditText{
 
     public static Pattern JAVA_KEY_WORD = Pattern.compile("\\b(" +
             "public|protected|private|class|extends|abstract|" +
@@ -21,8 +21,10 @@ public class JavaCodeEditText extends AbsCodeEditText {
             "|int|List|Map|String" +
             ")\\b");
 
+    @SuppressLint("SetTextI18n")
     public JavaCodeEditText(Context context) {
         super(context);
+        setText("JavaCodeEditText");
     }
 
     @Override

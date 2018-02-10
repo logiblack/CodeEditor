@@ -20,7 +20,7 @@ public class TimeHelper {
     public static String FormatTime(long time){
         String result = "";
         Date date = new Date(time);
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("YY-MM-DD HH-mm-ss");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
         result = dateFormat.format(date);
         return result;
     }
