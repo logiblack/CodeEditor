@@ -1,6 +1,7 @@
 package com.example.a14779.codeeditor.Controller;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -27,7 +28,7 @@ public class FileHelper {
 
     }
 
-    public static void saveFile(String fileName, String content, String filePath){
+    public void saveFile(String fileName, String content, String filePath){
         File file = new File(filePath+"/"+fileName);
         if (!file.exists()){
             try {
@@ -51,19 +52,37 @@ public class FileHelper {
 
     }
 
-    public static void readFile(String fileName, String result, String filePath) throws IOException {
-        File file = new File(filePath+fileName);
-        result = "";
+    public void createDirectory(String fileName, String filePath){
+        File file = new File(filePath+"/"+fileName);
         if (!file.exists()){
-            file.createNewFile();
-        }
-        Scanner scanner = new Scanner(file);
-        while (scanner.hasNext()){
-            result += scanner.nextLine();
+            file.mkdir();
         }
     }
 
-    public static void deleteFile(String fileName, String result, String filePath){
+    public String readFile(String fileName, String filePath){
+        File file = new File(filePath+"/"+fileName);
+        StringBuilder result = new StringBuilder();
+        if (!file.exists()){
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(file);
+            while (scanner.hasNext()){
+                result.append(scanner.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return result.toString();
+    }
+
+    public void deleteFile(String fileName, String result, String filePath){
         File file = new File(filePath+fileName);
         if (!file.exists()){
             return;
@@ -76,7 +95,7 @@ public class FileHelper {
         return size;
     }
 
-    public static String getFileType(String fileName){
+    public String getFileType(String fileName){
         Pattern CPattern = Pattern.compile(".*\\.c");
         Pattern JavaPattern = Pattern.compile(".*\\.java");
         Pattern CppPattern = Pattern.compile(".*\\.cpp");

@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,8 +21,11 @@ import com.example.a14779.codeeditor.Controller.ReClickListener;
 import com.example.a14779.codeeditor.MainActivity;
 import com.example.a14779.codeeditor.R;
 import com.github.clans.fab.FloatingActionButton;
+
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -61,7 +65,7 @@ public class HomePageView extends View implements View.OnClickListener, Toolbar.
         View view = LayoutInflater.from(context).inflate(R.layout.home_page_layout, null, false);
         bindView(view);
         basePath = context.getExternalFilesDir(null).getPath();
-        FileHelper.saveFile("test.c", "liangtao", basePath);
+        FileHelper.instance.saveFile("test.c", "liangtao", basePath);
         getProgramsList();
         //如果没有程序显示没有程序的布局
         if (nameList.size() == 0){
@@ -84,7 +88,14 @@ public class HomePageView extends View implements View.OnClickListener, Toolbar.
         mAdapter.setClickListener(new ReClickListener() {
             @Override
             public void onClick(View view, int position) {
+                File file = new File(basePath+"/"+nameList.get(position));
+                if (file.isDirectory()){
 
+                }
+                else {
+                    CodeView codeView = new CodeView(context, nameList.get(position));
+                    MainActivity.container.showView(codeView.initView());
+                }
             }
 
             @Override
@@ -124,10 +135,11 @@ public class HomePageView extends View implements View.OnClickListener, Toolbar.
                             public void onClick(DialogInterface dialog, int which) {
                                 EditText name = (EditText) createNewProgramView.getChildAt(0);
                                 Spinner type = (Spinner) createNewProgramView.getChildAt(1);
-                                if (Objects.equals(name.getText().toString(), "")) Toast.makeText(context, "文件名不能为空", Toast.LENGTH_SHORT).show();
+                                if (Objects.equals(name.getText().toString(), ""))
+                                    Toast.makeText(context, "文件名不能为空", Toast.LENGTH_SHORT).show();
                                 else {
                                     String suffix = "";
-                                    switch (type.getSelectedItem().toString()) {
+                                    switch (type.getSelectedItem().toString().trim()) {
                                         case "C语言":
                                             suffix = ".c";
                                             break;
@@ -138,7 +150,7 @@ public class HomePageView extends View implements View.OnClickListener, Toolbar.
                                             suffix = ".cpp";
                                             break;
                                     }
-                                    MainActivity.container.showView(new CodeView(context, name.getText().toString() + suffix).initView());
+                                    MainActivity.container.showView(new CodeView(context, name.getText().toString().trim() + suffix).initView());
                                     mAdapter.addItem(name.getText().toString() + suffix);
                                 }
                             }
@@ -147,14 +159,17 @@ public class HomePageView extends View implements View.OnClickListener, Toolbar.
 
                 break;
             case R.id.create_package_button:
+                final ViewGroup createPackageView = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.create_package_dialog_layput, null, false);
                 new AlertDialog.Builder(context)
                         .setTitle("新建包")
-                        .setView(R.layout.create_package_dialog_layput)
+                        .setView(createPackageView)
                         .setIcon(R.drawable.ic_create_new_folder_black_24dp)
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                EditText name = (EditText) createPackageView.getChildAt(0);
+                                FileHelper.instance.createDirectory(name.getText().toString().trim(), basePath);
+                                mAdapter.addItem(name.getText().toString().trim());
                             }
                         })
                         .show();

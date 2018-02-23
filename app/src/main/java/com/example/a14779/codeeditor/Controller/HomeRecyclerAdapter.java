@@ -40,10 +40,30 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        File file = new File(basePath+"/"+nameList.get(position));
-        holder.circleImageView.setImageResource(R.drawable.java_icon);
-        holder.title.setText(nameList.get(position));
-        holder.size.setText(String.valueOf(FileHelper.getFileSize(nameList.get(position), basePath)));
+        String curName = nameList.get(position);
+        File file = new File(basePath+"/"+curName);
+        if (file.isDirectory()){
+            holder.circleImageView.setImageResource(R.drawable.ic_folder_black_24dp);
+        }
+        else {
+            switch (FileHelper.instance.getFileType(curName)) {
+                case FileHelper.JAVA:
+                    holder.circleImageView.setImageResource(R.drawable.java_icon);
+                    break;
+                case FileHelper.C:
+                    holder.circleImageView.setImageResource(R.drawable.unknown_type_icon);
+                    break;
+                case FileHelper.CPP:
+                    holder.circleImageView.setImageResource(R.drawable.cpp_icon);
+                    break;
+                default:
+                    holder.circleImageView.setImageResource(R.drawable.unknown_type_icon);
+                    break;
+
+            }
+        }
+        holder.title.setText(curName);
+        holder.size.setText(String.valueOf(FileHelper.getFileSize(curName, basePath)));
         holder.time.setText(TimeHelper.FormatTime(file.lastModified()));
         //holder.time.setText(String.valueOf(file.lastModified()));
     }
@@ -58,7 +78,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
     }
 
     public void addItem(String itemName){
-        FileHelper.saveFile(itemName, "", basePath);
+        FileHelper.instance.saveFile(itemName, "", basePath);
         nameList.add(itemName);
         this.notifyDataSetChanged();
     }

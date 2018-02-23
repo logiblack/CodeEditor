@@ -4,7 +4,8 @@
     android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
         android:orientation="horizontal">
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="42dp"
@@ -14,7 +15,7 @@
             android:id="@+id/program_type_image"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginRight="8dp"
             android:layout_marginLeft="8dp">
@@ -22,8 +23,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="example.c"
-                android:textSize="24dp"
                 android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="?attr/custom_textColor"
                 android:id="@+id/program_name"/>
 
             <View
@@ -38,12 +40,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="2018年01月18日 21:08:21"
+                    android:textColor="?attr/custom_textColor"
                     android:id="@+id/program_create_time" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="20B"
                     android:layout_marginLeft="20dp"
+                    android:textColor="?attr/custom_textColor"
                     android:id="@+id/program_size"/>
 
             </LinearLayout>

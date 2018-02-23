@@ -8,11 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="MyNoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="MyNoActionBarTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="colorPrimary">#292423</item>
         <item name="colorPrimaryDark">#5c5a5a</item>
+        <item name="custom_textColor">#545252</item>
         <item name="android:textColorPrimary">#FFFFFF</item>
     </style>
 

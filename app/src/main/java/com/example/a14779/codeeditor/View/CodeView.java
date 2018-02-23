@@ -1,5 +1,6 @@
 package com.example.a14779.codeeditor.View;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -8,8 +9,13 @@ import android.view.View;
 import com.example.a14779.codeeditor.Controller.CodeHelper.CodeCRHelper;
 import com.example.a14779.codeeditor.Controller.CodeHelper.CompileCallback;
 import com.example.a14779.codeeditor.Controller.CodeHelper.RunCallback;
+import com.example.a14779.codeeditor.Controller.CodeHelper.RunResult;
+import com.example.a14779.codeeditor.Controller.FileHelper;
 import com.example.a14779.codeeditor.R;
 import com.example.a14779.codeeditor.View.CodeEditText.GeneralEditText;
+import com.example.a14779.codeeditor.View.CodeEditText.JavaCodeEditText;
+
+import java.io.File;
 
 /**
  * Created by liangtao on 18-1-31.
@@ -30,13 +36,15 @@ public class CodeView extends View implements Toolbar.OnMenuItemClickListener, R
         super(context);
         this.context = context;
         this.title = title;
-
     }
 
+    @SuppressLint("SdCardPath")
     public View initView(){
         View view = LayoutInflater.from(context).inflate(R.layout.code_view_layout, null, false);
         bindView(view);
         initToolBar();
+        String s = FileHelper.instance.readFile(title, context.getExternalFilesDir("").getPath());
+        editText.setText(s);
         return view;
     }
 
@@ -65,13 +73,14 @@ public class CodeView extends View implements Toolbar.OnMenuItemClickListener, R
         return true;
     }
 
+
     @Override
-    public void onRunning(String result) {
+    public void onCompiling(String result) {
 
     }
 
     @Override
-    public void onCompiling(String result) {
+    public void onRunning(RunResult result) {
 
     }
 }

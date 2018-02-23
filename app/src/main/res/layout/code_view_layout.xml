@@ -13,10 +13,21 @@
             android:id="@+id/code_view_tool_bar"/>
     </android.support.design.widget.AppBarLayout>
 
-    <com.example.a14779.codeeditor.View.CodeEditText.GeneralEditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="start"
-        android:background="@null"
-        android:id="@+id/code_edit_text_container"/>
+        android:background="@color/colorPrimary">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.example.a14779.codeeditor.View.CodeEditText.GeneralEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="start"
+                android:background="@null"
+                android:id="@+id/code_edit_text_container"/>
+        </ScrollView>
+
+    </LinearLayout>
+
 </LinearLayout>

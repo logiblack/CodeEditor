@@ -1,6 +1,7 @@
 package com.example.a14779.codeeditor.View.CodeEditText;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.text.Editable;
 import android.util.AttributeSet;
 
@@ -9,12 +10,23 @@ import android.util.AttributeSet;
  */
 
 public class GeneralEditText extends AbsCodeEditText {
+    private Canvas canvas;
+
     public GeneralEditText(Context context) {
         super(context);
+        mContext = context;
+        init();
     }
 
     public GeneralEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mContext = context;
+        init();
+    }
+
+    @Override
+    public void init() {
+        super.init();
     }
 
     @Override
@@ -24,6 +36,11 @@ public class GeneralEditText extends AbsCodeEditText {
 
     @Override
     public void autoIndent(Editable editable, int type) {
+
+    }
+
+    @Override
+    public void autoComplete(Editable e) {
 
     }
 }
