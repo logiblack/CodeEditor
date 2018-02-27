@@ -61,7 +61,7 @@
     <style name="img_arrow">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:src">@drawable/fab_add</item>
+        <item name="android:src">@drawable/setting_arro</item>
 
     </style>
 

@@ -184,7 +184,7 @@ public class HomePageView extends View implements View.OnClickListener, Toolbar.
                 MainActivity.container.showView(new SettingView(context).initView());
                 break;
             case R.id.home_page_menu_help:
-                MainActivity.container.showView(new HelpView(context));
+                MainActivity.container.showView(new HelpView(context).initView());
                 break;
         }
         return true;
