@@ -3,19 +3,25 @@ package com.example.a14779.codeeditor.View;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
 import com.example.a14779.codeeditor.Controller.CodeHelper.CodeCRHelper;
 import com.example.a14779.codeeditor.Controller.CodeHelper.CompileCallback;
 import com.example.a14779.codeeditor.Controller.CodeHelper.RunCallback;
 import com.example.a14779.codeeditor.Controller.CodeHelper.RunResult;
 import com.example.a14779.codeeditor.Controller.FileHelper;
+import com.example.a14779.codeeditor.MainActivity;
 import com.example.a14779.codeeditor.R;
 import com.example.a14779.codeeditor.View.CodeEditText.GeneralEditText;
 import com.example.a14779.codeeditor.View.CodeEditText.JavaCodeEditText;
 
-import java.io.File;
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by liangtao on 18-1-31.
@@ -24,6 +30,7 @@ import java.io.File;
 public class CodeView extends View implements Toolbar.OnMenuItemClickListener, RunCallback, CompileCallback {
     private Context context;
     private String title;
+    private LinearLayout container;
     private GeneralEditText editText;
     private android.support.v7.widget.Toolbar toolbar;
 
@@ -44,7 +51,11 @@ public class CodeView extends View implements Toolbar.OnMenuItemClickListener, R
         bindView(view);
         initToolBar();
         String s = FileHelper.instance.readFile(title, context.getExternalFilesDir("").getPath());
-        editText.setText(s);
+        editText = new JavaCodeEditText(context);
+        editText.setHighLightText(s);
+        editText.setBackground(null);
+        editText.setWidth(getScreenWith());
+        container.addView(editText);
         return view;
     }
 
@@ -54,7 +65,8 @@ public class CodeView extends View implements Toolbar.OnMenuItemClickListener, R
     }
 
     private void bindView(View view) {
-        editText = view.findViewById(R.id.code_edit_text_container);
+        //editText = view.findViewById(R.id.code_edit_text_container);
+        container = view.findViewById(R.id.edit_text_container);
         toolbar = view.findViewById(R.id.code_view_tool_bar);
         toolbar.setOnMenuItemClickListener(this);
     }
@@ -82,5 +94,11 @@ public class CodeView extends View implements Toolbar.OnMenuItemClickListener, R
     @Override
     public void onRunning(RunResult result) {
 
+    }
+
+    public int getScreenWith(){
+        DisplayMetrics dm = new DisplayMetrics();
+        ((MainActivity)context).getWindowManager().getDefaultDisplay().getMetrics(dm);
+        return  dm.widthPixels ;
     }
 }

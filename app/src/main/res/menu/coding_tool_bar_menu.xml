@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:icon="@drawable/compile"
         android:id="@+id/code_compile"
-        app:showAsAction="always"
-        android:title="编译" />
+        android:icon="@drawable/compile"
+        android:title="编译"
+        app:showAsAction="ifRoom" />
     <item
-        android:title="运行"
         android:id="@+id/code_run"
         android:icon="@drawable/run"
-        app:showAsAction="always"/>
+        android:title="运行"
+        app:showAsAction="always" />
 </menu>

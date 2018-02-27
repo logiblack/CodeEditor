@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/setting_tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#33383e">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/wrap_layout">
+                <!-- 上圆角-->
+                <LinearLayout style="@style/top_layout">
+
+                    <TextView
+                        style="@style/usertext"
+                        android:text="个性签名" />
+
+                    <ImageView style="@style/img_arrow" />
+                </LinearLayout>
+
+                <!-- 分割线 -->
+                <View style="@style/bg_line" />
+                <!-- 无圆角-->
+                <LinearLayout style="@style/mid_layout">
+
+                    <TextView
+                        style="@style/usertext"
+                        android:text="我的资料" />
+
+                    <ImageView style="@style/img_arrow" />
+                </LinearLayout>
+
+                <View style="@style/bg_line" />
+                <!-- 下圆角-->
+                <LinearLayout style="@style/bottom_layout">
+
+                    <TextView
+                        style="@style/usertext"
+                        android:text="消息通知" />
+
+                    <ImageView style="@style/img_arrow" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 全圆角-->
+            <LinearLayout style="@style/wrap_layout">
+
+                <LinearLayout style="@style/single_layout">
+
+                    <TextView
+                        style="@style/usertext"
+                        android:text="辅助功能" />
+
+                    <ImageView style="@style/img_arrow" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

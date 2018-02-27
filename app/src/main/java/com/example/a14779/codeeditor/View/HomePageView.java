@@ -65,7 +65,7 @@ public class HomePageView extends View implements View.OnClickListener, Toolbar.
         View view = LayoutInflater.from(context).inflate(R.layout.home_page_layout, null, false);
         bindView(view);
         basePath = context.getExternalFilesDir(null).getPath();
-        FileHelper.instance.saveFile("test.c", "liangtao", basePath);
+        FileHelper.instance.saveFile("test.c", "import int long double", basePath);
         getProgramsList();
         //如果没有程序显示没有程序的布局
         if (nameList.size() == 0){
@@ -181,7 +181,7 @@ public class HomePageView extends View implements View.OnClickListener, Toolbar.
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
             case R.id.home_page_menu_setting:
-                MainActivity.container.showView(new SettingView(context));
+                MainActivity.container.showView(new SettingView(context).initView());
                 break;
             case R.id.home_page_menu_help:
                 MainActivity.container.showView(new HelpView(context));

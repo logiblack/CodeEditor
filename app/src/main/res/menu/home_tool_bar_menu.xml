@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/home_page_menu_setting"
-        android:title="设置"
         android:icon="@drawable/ic_settings_black_24dp"
-        app:showAsAction="never"/>
+        android:title="设置"
+        app:showAsAction="never" />
     <item
         android:id="@+id/home_page_menu_help"
-        android:title="分享"
         android:icon="@drawable/ic_share_black_24dp"
-        app:showAsAction="never"/>
+        android:title="分享"
+        app:showAsAction="never" />
 </menu>

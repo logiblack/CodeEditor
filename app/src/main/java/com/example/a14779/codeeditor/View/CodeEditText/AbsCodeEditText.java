@@ -12,12 +12,15 @@ import android.text.TextWatcher;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.logging.Handler;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by liangtao on 18-1-22.
@@ -42,14 +45,19 @@ public abstract class AbsCodeEditText extends EditText {
 
     public AbsCodeEditText(Context mContext) {
         super(mContext);
+        this.mContext = mContext;
+        init();
     }
 
     public AbsCodeEditText(Context mContext, AttributeSet attrs) {
         super(mContext, attrs);
+        this.mContext = mContext;
+        init();
     }
 
     public AbsCodeEditText(Context mContext, AttributeSet attrs, int defStyleAttr) {
         super(mContext, attrs, defStyleAttr);
+        this.mContext = mContext;
         init();
     }
 
@@ -157,7 +165,7 @@ public abstract class AbsCodeEditText extends EditText {
     /**
      * 高亮文本
      * @param editable 需要高亮的文本*/
-    public abstract void highLight(Editable editable);
+    public abstract Editable highLight(Editable editable);
 
     /**
      * 自动缩进文本
@@ -171,10 +179,8 @@ public abstract class AbsCodeEditText extends EditText {
     public abstract void autoComplete(Editable e);
 
 
-    @Override
-    public void setText(CharSequence text, BufferType type) {
-        super.setText(text, type);
-        highLight(new SpannableStringBuilder(text));
+    public void setHighLightText(CharSequence text) {
+        setText(highLight(new SpannableStringBuilder(text)));
     }
 
     /**

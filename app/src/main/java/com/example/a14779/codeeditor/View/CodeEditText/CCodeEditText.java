@@ -2,6 +2,7 @@ package com.example.a14779.codeeditor.View.CodeEditText;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.text.Editable;
 
 /**
  * Created by liangtao on 18-1-22.
@@ -13,5 +14,4 @@ public class CCodeEditText extends GeneralEditText {
         super(context);
         setText("CCodeEditText");
     }
-
 }

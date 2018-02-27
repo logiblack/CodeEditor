@@ -4,4 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="dividingLine">#000000</color>
+
+    <color name="javaHeadFile">#e2790f</color>
+    <color name="javaDataType">#ff0303</color>
+    <color name="mathSign">#00ffe1</color>
+    <color name="javaKeyWord">#1ef401</color>
+    <color name="setting_unselect_bg">#8c8c8c</color>
 </resources>
