@@ -5,5 +5,5 @@ package com.example.a14779.codeeditor.Controller.CodeHelper;
  */
 
 public interface RunCallback {
-    void onRunning(RunResult result);
+    void onRunning(RunCommandResult result);
 }

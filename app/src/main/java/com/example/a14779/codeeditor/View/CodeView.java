@@ -8,16 +8,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.example.a14779.codeeditor.Controller.CodeHelper.CodeCRHelper;
 import com.example.a14779.codeeditor.Controller.CodeHelper.CompileCallback;
 import com.example.a14779.codeeditor.Controller.CodeHelper.RunCallback;
-import com.example.a14779.codeeditor.Controller.CodeHelper.RunResult;
+import com.example.a14779.codeeditor.Controller.CodeHelper.RunCommandResult;
 import com.example.a14779.codeeditor.Controller.FileHelper;
 import com.example.a14779.codeeditor.MainActivity;
 import com.example.a14779.codeeditor.R;
+import com.example.a14779.codeeditor.View.CodeEditText.CCodeEditText;
+import com.example.a14779.codeeditor.View.CodeEditText.CPPCodeEditText;
 import com.example.a14779.codeeditor.View.CodeEditText.GeneralEditText;
 import com.example.a14779.codeeditor.View.CodeEditText.JavaCodeEditText;
 
@@ -33,6 +34,7 @@ public class CodeView extends View implements Toolbar.OnMenuItemClickListener, R
     private LinearLayout container;
     private GeneralEditText editText;
     private android.support.v7.widget.Toolbar toolbar;
+    private int mCodeType;
 
     public CodeView(Context context) {
         super(context);
@@ -51,7 +53,18 @@ public class CodeView extends View implements Toolbar.OnMenuItemClickListener, R
         bindView(view);
         initToolBar();
         String s = FileHelper.instance.readFile(title, context.getExternalFilesDir("").getPath());
-        editText = new JavaCodeEditText(context);
+        mCodeType = FileHelper.instance.getFileType(title);
+        switch (mCodeType){
+            case FileHelper.JAVA:
+                editText = new JavaCodeEditText(context);
+                break;
+            case FileHelper.C:
+                editText = new CCodeEditText(context);
+                break;
+            case  FileHelper.CPP:
+                editText = new CPPCodeEditText(context);
+                break;
+        }
         editText.setHighLightText(s);
         editText.setBackground(null);
         editText.setWidth(getScreenWith());
@@ -76,10 +89,10 @@ public class CodeView extends View implements Toolbar.OnMenuItemClickListener, R
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
             case R.id.code_compile:
-                CodeCRHelper.instance.Compile(editText.getText().toString(), this);
+                CodeCRHelper.instance.Compile(context, title, this);
                 break;
             case R.id.code_run:
-                CodeCRHelper.instance.Run(editText.getText().toString(), this);
+                CodeCRHelper.instance.Run(title, this);
                 break;
         }
         return true;
@@ -87,13 +100,15 @@ public class CodeView extends View implements Toolbar.OnMenuItemClickListener, R
 
 
     @Override
-    public void onCompiling(String result) {
-
+    public void onCompiling(RunCommandResult result) {
+        Log.i(TAG, "onCompiling: result:"+result.getResult()+"\n" +
+                "error:"+result.getErrorMessage());
     }
 
     @Override
-    public void onRunning(RunResult result) {
-
+    public void onRunning(RunCommandResult result) {
+        Log.i(TAG, "onCompiling: result:"+result.getResult()+"\n" +
+                "error:"+result.getErrorMessage());
     }
 
     public int getScreenWith(){

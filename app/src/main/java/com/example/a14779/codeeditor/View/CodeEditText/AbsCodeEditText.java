@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.logging.Handler;
+import java.util.regex.Pattern;
 
 import static android.content.ContentValues.TAG;
 
@@ -34,6 +35,12 @@ public abstract class AbsCodeEditText extends EditText {
     protected Paint mNumBacPaint;
     protected Context mContext;
     protected Layout mLayout;
+    //default size
+    public int mNumPaintSize = 14;
+
+    public int mNumPaintColor = Color.parseColor("#FFFFFF");
+
+    protected static Pattern MATH_SIGN = Pattern.compile("[+\\-*/^%|&!<>]");
 
     protected android.os.Handler handler = new android.os.Handler();
     protected Runnable runnable = new Runnable() {
@@ -71,10 +78,10 @@ public abstract class AbsCodeEditText extends EditText {
     public void init() {
 
         mNumPaint = new Paint();
-        mNumPaint.setTextSize(getPixels(14));
+        mNumPaint.setTextSize(getPixels(mNumPaintSize));
         mNumPaint.setAntiAlias(false);
         mNumPaint.setStyle(Paint.Style.FILL);
-        mNumPaint.setColor(Color.parseColor("#FFFFFF"));
+        mNumPaint.setColor(mNumPaintColor);
 
         mNumBacPaint = new Paint();
         mNumBacPaint.setAntiAlias(false);
@@ -243,5 +250,13 @@ public abstract class AbsCodeEditText extends EditText {
 
     private float getPixels(int dp){
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, mContext.getResources().getDisplayMetrics());
+    }
+
+    public void setmNumPaintSize(int dp){
+        mNumPaintSize = dp;
+    }
+
+    public void setmNumPaintColor(int mNumPaintColor) {
+        this.mNumPaintColor = mNumPaintColor;
     }
 }

@@ -1,12 +1,8 @@
 package com.example.a14779.codeeditor;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.WindowManager;
 
 import com.example.a14779.codeeditor.Controller.Container.FrameContainer;
 import com.example.a14779.codeeditor.Controller.PluginInit;

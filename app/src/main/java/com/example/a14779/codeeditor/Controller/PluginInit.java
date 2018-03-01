@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 import static android.content.ContentValues.TAG;
 
@@ -41,11 +42,14 @@ public class PluginInit {
                 Runtime runtime = Runtime.getRuntime();
                 try {
                     Process process = runtime.exec("chmod -R 777 "+path+"/gcc");
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }).start();
+
+
     }
 
 }

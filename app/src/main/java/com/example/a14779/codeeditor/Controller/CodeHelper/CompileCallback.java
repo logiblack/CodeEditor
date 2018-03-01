@@ -5,5 +5,5 @@ package com.example.a14779.codeeditor.Controller.CodeHelper;
  */
 
 public interface CompileCallback {
-    void onCompiling(String result);
+    void onCompiling(RunCommandResult result);
 }

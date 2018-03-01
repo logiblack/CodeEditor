@@ -4,7 +4,7 @@ package com.example.a14779.codeeditor.Controller.CodeHelper;
  * Created by liangtao on 18-2-12.
  */
 
-public class RunResult {
+public class RunCommandResult {
 
     /**
      * result : hello world!

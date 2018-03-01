@@ -17,22 +17,21 @@ import java.util.regex.Pattern;
 
 public class JavaCodeEditText extends GeneralEditText{
 
-    public static Pattern JAVA_KEY_WORD = Pattern.compile("\\b(" +
+    private static Pattern JAVA_KEY_WORD = Pattern.compile("\\b(" +
             "public|protected|private|class|extends|abstract|" +
-            "interface|null|void|synchronized|final|default|break|" +
+            "interface|synchronized|final|default|break|" +
             "switch|case|continue|this|try|static|true|false|do|while|" +
             "instanceof|if|else|return|for|;|new|native|super" +
             ")\\b");
 
-    public static Pattern JAVA_DATA_TYPE = Pattern.compile("\\b(" +
+    private static Pattern JAVA_DATA_TYPE = Pattern.compile("\\b(" +
             "boolen|char|double|Editable|float|HashMap" +
-            "|int|long|List|Map|String" +
+            "|int|long|List|Map|String|null|void" +
             ")\\b");
 
-    public static Pattern JAVA_HEAD_FILE = Pattern.compile("([^\\s\\S]*" +
+    private static Pattern JAVA_HEAD_FILE = Pattern.compile("([^\\s\\S]*" +
             "package|import)|\\.");
 
-    public static Pattern JAVA_MATH_SIGN = Pattern.compile("[+\\-*/^%|&!]");
 
     @SuppressLint("SetTextI18n")
     public JavaCodeEditText(Context context) {
@@ -57,7 +56,7 @@ public class JavaCodeEditText extends GeneralEditText{
             editable.setSpan(new ForegroundColorSpan(mContext.getColor(R.color.javaKeyWord)),
                     m.start(), m.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
-        for (Matcher m = JAVA_MATH_SIGN.matcher(editable); m.find();){
+        for (Matcher m = MATH_SIGN.matcher(editable); m.find();){
             editable.setSpan(new ForegroundColorSpan(mContext.getColor(R.color.mathSign)),
                     m.start(), m.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }

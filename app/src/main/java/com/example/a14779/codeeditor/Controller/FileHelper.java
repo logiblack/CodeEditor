@@ -24,9 +24,9 @@ import java.util.regex.Pattern;
 
 public class FileHelper {
     public static FileHelper instance = new FileHelper();
-    public static final String C = "c";
-    public static final String JAVA = "java";
-    public static final String CPP = "cpp";
+    public static final int C = 0x000001;
+    public static final int JAVA = 0x000002;
+    public static final int CPP = 0x000003;
 
     private FileHelper(){
 
@@ -51,7 +51,6 @@ public class FileHelper {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void createDirectory(String fileName, String filePath){
@@ -113,14 +112,14 @@ public class FileHelper {
         return size;
     }
 
-    public String getFileType(String fileName){
+    public int getFileType(String fileName){
         Pattern CPattern = Pattern.compile(".*\\.c");
         Pattern JavaPattern = Pattern.compile(".*\\.java");
         Pattern CppPattern = Pattern.compile(".*\\.cpp");
         if(CPattern.matcher(fileName).matches()) return C;
         else if (CppPattern.matcher(fileName).matches()) return CPP;
         else if (JavaPattern.matcher(fileName).matches()) return JAVA;
-        return "";
+        return 0;
     }
 
 

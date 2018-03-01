@@ -3,12 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/code_compile"
-        android:icon="@drawable/compile"
         android:title="编译"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/code_run"
-        android:icon="@drawable/run"
         android:title="运行"
         app:showAsAction="always" />
 </menu>

@@ -61,7 +61,8 @@ public class HomePageView extends View implements View.OnClickListener, Toolbar.
         View view = LayoutInflater.from(context).inflate(R.layout.home_page_layout, null, false);
         bindView(view);
         basePath = context.getExternalFilesDir(null).getPath();
-        FileHelper.instance.saveFile("test.c", "import int long double", basePath);
+        FileHelper.instance.saveFile("test.c", "#include<stdio.h>" +
+                "\nint main(){printf(\"hello\\n \"); return 0;}", basePath);
         getProgramsList();
         //如果没有程序显示没有程序的布局
         if (nameList.size() == 0){
