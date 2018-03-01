@@ -14,22 +14,16 @@
             android:layout_height="wrap_content" />
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
+        android:background="?attr/code_bg_color_day">
 
-        <ScrollView
+        <LinearLayout
+            android:id="@+id/edit_text_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:id="@+id/edit_text_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" />
-        </ScrollView>
-
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+    </ScrollView>
 
 </LinearLayout>

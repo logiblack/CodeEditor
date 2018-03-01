@@ -1,8 +1,14 @@
 package com.example.a14779.codeeditor.Controller;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.widget.Toast;
+
+import com.example.a14779.codeeditor.R;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,36 +23,29 @@ import static android.content.ContentValues.TAG;
 
 public class PluginInit {
     public static PluginInit instance = new PluginInit();
-    public static String SDCARD_PATH = Environment.getExternalStorageDirectory().getPath();
+    @SuppressLint("SdCardPath")
+    public static String HOMEPATH = "/data/user/0/com.example.a14779.codeeditor/";
 
     private PluginInit(){
 
     }
 
-    public void addGCC(Context context){
-        Runtime runtime = Runtime.getRuntime();
-        String path = context.getExternalFilesDir("").getPath();
-        try {
-            String[] cmd = {"ls "+path, "cd "+path+"/gcc", "ls -l"};
-            Process process = runtime.exec("cd "+path);
-            StringBuilder sb = new StringBuilder();
-            StringBuilder sbE = new StringBuilder();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            BufferedReader reader1 = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            String line = "";
-            while ((line = reader.readLine()) != null){
-                sb.append(line+"\n");
-            }
-            while ((line = reader1.readLine()) != null){
-                sbE.append(line+"\n");
-            }
-            Log.i(TAG, "addGCC: *************"+sb.toString()+"\n" +
-                    "error:"+sbE.toString()+"\n" +
-                    "path:"+ path +"\n");
+    public void addGCC(final Context context){
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        final String path = context.getFilesDir().getPath();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ZipFileHelper.unzip(context, "gcc.zip", path);
+                Runtime runtime = Runtime.getRuntime();
+                try {
+                    Process process = runtime.exec("chmod -R 777 "+path+"/gcc");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
 }

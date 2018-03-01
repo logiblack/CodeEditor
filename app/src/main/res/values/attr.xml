@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--代码编辑页面的字体大小-->
+    <attr name="code_text_size" format="reference|dimension" />
+    <!--白天主题代码编辑页面背景颜色-->
+    <attr name="code_bg_color_day" format="reference|color"/>
+    <!--夜晚主题代码编辑页面背景颜色-->
+    <attr name="code_bg_color_night" format="reference|color" />
+</resources>

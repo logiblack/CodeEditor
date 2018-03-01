@@ -1,5 +1,6 @@
 package com.example.a14779.codeeditor.View;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -30,6 +31,7 @@ public class HelpView extends View implements View.OnClickListener {
         mContext = context;
     }
 
+    @SuppressLint("InflateParams")
     public View initView(){
         View view;
         view = LayoutInflater.from(mContext).inflate(R.layout.help_view_layout, null, false);

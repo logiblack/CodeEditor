@@ -12,6 +12,8 @@ import com.example.a14779.codeeditor.Controller.Container.FrameContainer;
 import com.example.a14779.codeeditor.Controller.PluginInit;
 import com.example.a14779.codeeditor.View.HomePageView;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
     @SuppressLint("StaticFieldLeak")
     public static FrameContainer container;
@@ -19,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!new File(this.getFilesDir()+File.separator+"gcc").exists()) {
+            PluginInit.instance.addGCC(this);
+        }
         HomePageView homePageView = new HomePageView(MainActivity.this);
         setContentView(R.layout.main_activity_layout);
         container = findViewById(R.id.container);

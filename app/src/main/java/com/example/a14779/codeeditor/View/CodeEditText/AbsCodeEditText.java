@@ -2,6 +2,7 @@ package com.example.a14779.codeeditor.View.CodeEditText;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -68,6 +69,7 @@ public abstract class AbsCodeEditText extends EditText {
     }
 
     public void init() {
+
         mNumPaint = new Paint();
         mNumPaint.setTextSize(getPixels(14));
         mNumPaint.setAntiAlias(false);
@@ -78,6 +80,8 @@ public abstract class AbsCodeEditText extends EditText {
         mNumBacPaint.setAntiAlias(false);
         mNumBacPaint.setStyle(Paint.Style.FILL);
         mNumBacPaint.setColor(Color.parseColor("#bbbbbb"));
+
+
 
         getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override

@@ -55,14 +55,14 @@
                 app:fab_shadowYOffset="2dp" />
 
             <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/create_package_button"
+                android:id="@+id/open_local_file_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|bottom"
                 android:src="@drawable/ic_create_new_folder_black_24dp"
                 app:fab_colorNormal="@color/colorPrimaryDark"
                 app:fab_colorPressed="@color/colorAccent"
-                app:fab_label="创建文件夹"
+                app:fab_label="打开本地文件"
                 app:fab_shadowXOffset="2dp"
                 app:fab_shadowYOffset="2dp" />
         </com.github.clans.fab.FloatingActionMenu>

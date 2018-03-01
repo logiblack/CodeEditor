@@ -1,6 +1,7 @@
 package com.example.a14779.codeeditor.Controller.Container;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -48,4 +49,5 @@ public class LinearContainer extends LinearLayout implements container {
     public int getStackSize(){
         return stack.size();
     }
+
 }

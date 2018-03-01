@@ -15,6 +15,7 @@
         <item name="colorPrimaryDark">#5c5a5a</item>
         <item name="custom_textColor">#545252</item>
         <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="code_bg_color_day">#212121</item>
     </style>
 
     <style name="popMenu" parent="ThemeOverlay.AppCompat.Dark">

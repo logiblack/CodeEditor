@@ -1,7 +1,11 @@
 package com.example.a14779.codeeditor.Controller;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -44,8 +48,6 @@ public class FileHelper {
             bufferedOutputStream.write(content.getBytes());
             bufferedOutputStream.flush();
             bufferedOutputStream.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -90,6 +92,22 @@ public class FileHelper {
         file.delete();
     }
 
+    public void reName(File oldFile, String newName, Context context){
+        File file = new File(oldFile.getPath()+"/"+newName);
+        if (file.exists()){
+            Toast.makeText(context, "修改失败,新命名的文件已存在", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+        }
+    }
+
     public static long getFileSize(String fileName, String filePath){
         long size = 0;
         return size;
@@ -104,4 +122,6 @@ public class FileHelper {
         else if (JavaPattern.matcher(fileName).matches()) return JAVA;
         return "";
     }
+
+
 }

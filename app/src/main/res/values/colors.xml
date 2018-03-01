@@ -10,4 +10,5 @@
     <color name="mathSign">#00ffe1</color>
     <color name="javaKeyWord">#1ef401</color>
     <color name="setting_unselect_bg">#8c8c8c</color>
+    <color name="setting_select_bg">#b3b3b3</color>
 </resources>

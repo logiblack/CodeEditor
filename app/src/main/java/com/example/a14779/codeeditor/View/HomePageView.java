@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,10 +21,7 @@ import com.example.a14779.codeeditor.MainActivity;
 import com.example.a14779.codeeditor.R;
 import com.github.clans.fab.FloatingActionButton;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,7 +40,7 @@ public class HomePageView extends View implements View.OnClickListener, Toolbar.
     private Toolbar toolbar;
     private RecyclerView programList;
     private FloatingActionButton createProgram;
-    private FloatingActionButton createPackage;
+    private FloatingActionButton openLocalFile;
     private ViewGroup noProgramLayout;
     private HomeRecyclerAdapter mAdapter;
 
@@ -56,7 +52,7 @@ public class HomePageView extends View implements View.OnClickListener, Toolbar.
     private void bindView(View view) {
         programList = view.findViewById(R.id.program_list);
         createProgram = view.findViewById(R.id.create_project_button);
-        createPackage = view.findViewById(R.id.create_package_button);
+        openLocalFile = view.findViewById(R.id.open_local_file_button);
         toolbar = view.findViewById(R.id.home_page_tool_bar);
         noProgramLayout = view.findViewById(R.id.no_program_layout);
     }
@@ -89,18 +85,18 @@ public class HomePageView extends View implements View.OnClickListener, Toolbar.
             @Override
             public void onClick(View view, int position) {
                 File file = new File(basePath+"/"+nameList.get(position));
-                if (file.isDirectory()){
-
-                }
-                else {
-                    CodeView codeView = new CodeView(context, nameList.get(position));
-                    MainActivity.container.showView(codeView.initView());
-                }
+                CodeView codeView = new CodeView(context, nameList.get(position));
+                MainActivity.container.showView(codeView.initView());
             }
 
             @Override
             public void onLongClick(View view, int position) {
-
+                File file = new File(basePath+"/"+nameList.get(position));
+                List<String> editList = new ArrayList<>();
+                editList.add("打开");
+                editList.add("重命名");
+                editList.add("删除");
+                editList.add("属性");
             }
         });
         programList.setLayoutManager(new LinearLayoutManager(context));
@@ -109,7 +105,7 @@ public class HomePageView extends View implements View.OnClickListener, Toolbar.
 
     private void initFloatingActionBt() {
         createProgram.setOnClickListener(this);
-        createPackage.setOnClickListener(this);
+        openLocalFile.setOnClickListener(this);
     }
 
     /***读取文件中的程序源代码文件名存储于 nameList 中*/
@@ -158,21 +154,8 @@ public class HomePageView extends View implements View.OnClickListener, Toolbar.
                         .show();
 
                 break;
-            case R.id.create_package_button:
-                final ViewGroup createPackageView = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.create_package_dialog_layput, null, false);
-                new AlertDialog.Builder(context)
-                        .setTitle("新建包")
-                        .setView(createPackageView)
-                        .setIcon(R.drawable.ic_create_new_folder_black_24dp)
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                EditText name = (EditText) createPackageView.getChildAt(0);
-                                FileHelper.instance.createDirectory(name.getText().toString().trim(), basePath);
-                                mAdapter.addItem(name.getText().toString().trim());
-                            }
-                        })
-                        .show();
+            case R.id.open_local_file_button:
+                MainActivity.container.showView(new LocalFileView(context).initView());
                 break;
         }
     }

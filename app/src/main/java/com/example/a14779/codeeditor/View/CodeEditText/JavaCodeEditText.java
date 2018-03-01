@@ -5,14 +5,11 @@ import android.content.Context;
 import android.text.Editable;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 
 import com.example.a14779.codeeditor.R;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by liangtao on 18-1-22.
@@ -66,5 +63,11 @@ public class JavaCodeEditText extends GeneralEditText{
         }
         return editable;
     }
+
+    @Override
+    public void autoComplete(Editable e) {
+        super.autoComplete(e);
+    }
+
 
 }
